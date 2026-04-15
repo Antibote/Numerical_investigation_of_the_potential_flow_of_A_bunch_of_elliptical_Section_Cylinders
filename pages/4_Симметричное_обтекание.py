@@ -91,26 +91,31 @@ if menu == "Комплексный потенциал течения":
 
 
 elif menu == "Критические точки":
-    r"""
+    st.markdown(r"""
     ##### Критические точки
 
     Определим положение критических точек, решив уравнение
-    
-    $\begin{aligned}
+
+    $$
+    \begin{aligned}
     u_{\infty} \left(1 - \frac{r^2}{z^2}\right) + \frac{\Gamma}{2 \pi i} \frac{1}{z} = 0
-    \end{aligned}$
+    \end{aligned}
+    $$
 
     Оно сводится к квадратному
 
-    $\begin{aligned}
+    $$
+    \begin{aligned}
     z^2 - \frac{\Gamma i}{2 \pi u_{\infty}} z - r^2 = 0
-    \end{aligned}$
+    \end{aligned}
+    $$
 
-    $\begin{aligned}
+    $$
+    \begin{aligned}
     z_{1,2} = \frac{\Gamma i}{4 \pi u_{\infty}} \pm \sqrt{r^2 - \frac{\Gamma^2}{16 \pi^2 u^2_{\infty}}}
-    \end{aligned}$
-
-    """
+    \end{aligned}
+    $$
+    """)
 
     with st.expander("Критические точки"):
         code = """
@@ -127,93 +132,121 @@ elif menu == "Критические точки":
         stagnation_x2 = fsolve(stagnation_eq, cx - c)[0]
         stagnation_points = np.array([[stagnation_x1, cy], [stagnation_x2, cy]])
         """
-
         st.code(code, language="python")
 
     subtopic = st.selectbox(
-        "Выберите случай",  
-        ["1. Оба корня чисто мнимые и лежат на мнимой оси", "2. Кратные корни", "3. Комплексные корни", "4. Бесциркулляционное течение"]  
+        "Выберите случай",
+        ["1. Оба корня чисто мнимые и лежат на мнимой оси",
+         "2. Кратные корни",
+         "3. Комплексные корни",
+         "4. Бесциркуляционное течение"]
     )
 
     if subtopic == "1. Оба корня чисто мнимые и лежат на мнимой оси":
-        r"""
-        $\begin{aligned}
+        st.markdown(r"""
+        $$
+        \begin{aligned}
         \Gamma > 4 \pi u_{\infty} r
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
-        z_1 = i \left[\frac{\Gamma i}{4 \pi u_{\infty}} + \sqrt{\frac{\Gamma^2}{16 \pi^2 u^2_{\infty}} - r^2}\right]
-        \end{aligned}$
+        $$
+        \begin{aligned}
+        z_1 = i \left[\frac{\Gamma}{4 \pi u_{\infty}} + \sqrt{\frac{\Gamma^2}{16 \pi^2 u^2_{\infty}} - r^2}\right]
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
-        \text{Im } z_1 > \frac{\Gamma}{4 \pi u_{\infty}} > r
-        \end{aligned}$
+        $$
+        \begin{aligned}
+        \operatorname{Im} z_1 = \frac{\Gamma}{4 \pi u_{\infty}} + \sqrt{\frac{\Gamma^2}{16 \pi^2 u^2_{\infty}} - r^2} > r
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
-        z_2 = i \left[\frac{\Gamma i}{4 \pi u_{\infty}} - \sqrt{\frac{\Gamma^2}{16 \pi^2 u^2_{\infty}} - r^2}\right]
-        \end{aligned}$
+        $$
+        \begin{aligned}
+        z_2 = i \left[\frac{\Gamma}{4 \pi u_{\infty}} - \sqrt{\frac{\Gamma^2}{16 \pi^2 u^2_{\infty}} - r^2}\right]
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
-        \text{Im } z_2 = \frac{a^2}{\frac{\Gamma}{4 \pi u_{\infty}} + \sqrt{\frac{\Gamma^2}{16 \pi^2 u_{\infty}^2} - r^2}} < \frac{r^2}{\Gamma^2 / (4 \pi u_{\infty})} < \frac{r^2}{r} < r
-        \end{aligned}$ 
+        $$
+        \begin{aligned}
+        \operatorname{Im} z_2 = \frac{r^2}{\frac{\Gamma}{4 \pi u_{\infty}} + \sqrt{\frac{\Gamma^2}{16 \pi^2 u_{\infty}^2} - r^2}} < r
+        \end{aligned}
+        $$
 
         Второй корень находится внутри круга и не представляет для нас никакого смысла.
-        """
-        #st.image("teor_4.png", caption="",use_container_width=True)
+        """)
+        # st.image("teor_4.png", caption="", use_container_width=True)
 
     elif subtopic == "2. Кратные корни":
-        r"""
-        $\begin{aligned}
+        st.markdown(r"""
+        $$
+        \begin{aligned}
         \Gamma = 4 \pi u_{\infty} r
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         z_1 = z_2 = i r
-        \end{aligned}$
+        \end{aligned}
+        $$
 
         Корни сливаются между собой и расположены в наивысшей точке цилиндра.
-        """
-        #st.image("teor_3.png", caption="",use_container_width=True)
+        """)
+        # st.image("teor_3.png", caption="", use_container_width=True)
 
     elif subtopic == "3. Комплексные корни":
-        r"""
-        $\begin{aligned}
+        st.markdown(r"""
+        $$
+        \begin{aligned}
         \Gamma < 4 \pi u_{\infty} r
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         z_1 = \frac{\Gamma i}{4 \pi u_{\infty}} + \sqrt{r^2 - \frac{\Gamma^2}{16 \pi^2 u^2_{\infty}}}
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         z_2 = \frac{\Gamma i}{4 \pi u_{\infty}} - \sqrt{r^2 - \frac{\Gamma^2}{16 \pi^2 u^2_{\infty}}}
-        \end{aligned}$
+        \end{aligned}
+        $$
 
         Корни расположены симметрично относительно оси $x_2$. Оба корня лежат на окружности, так как
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         |z_1| = |z_2| = r
-        \end{aligned}$
-        """
-        #st.image("teor_5.png", caption="",use_container_width=True)
+        \end{aligned}
+        $$
+        """)
+        # st.image("teor_5.png", caption="", use_container_width=True)
 
-    elif subtopic == "4. Бесциркулляционное течение":
-        r"""
-        $\begin{aligned}
+    elif subtopic == "4. Бесциркуляционное течение":
+        st.markdown(r"""
+        $$
+        \begin{aligned}
         u_{\infty} \left(1 - \frac{r^2}{z^2}\right) = 0
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         z_1 = r
-        \end{aligned}$
+        \end{aligned}
+        $$
 
-        $\begin{aligned}
+        $$
+        \begin{aligned}
         z_2 = - r
-        \end{aligned}$
-
-        """
-        #st.image("teor_2.png", caption="",use_container_width=True)
-    
+        \end{aligned}
+        $$
+        """)
+        # st.image("teor_2.png", caption="", use_container_width=True)
 
 elif menu == "Аналитическое решение":
     r"""
