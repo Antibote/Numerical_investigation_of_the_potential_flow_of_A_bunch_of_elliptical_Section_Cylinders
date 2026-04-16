@@ -29,14 +29,14 @@ st.markdown(r"""
 """)
 
 # Загрузка изображения
-st.image("6.png", 
-        use_container_width=True)
+c1, _ = st.columns([200, 1])
+c1.image("6.png")
 
 st.markdown(r"""
 **Ячейка периодичности**
 """)
-st.image("7.png", 
-        use_container_width=True)
+c1, _ = st.columns([20, 1])
+c1.image("7.png")
 
 st.markdown(r"""
 + $D -$ эллиптическое сечение цилиндров, повернутых на 45 градусов  
